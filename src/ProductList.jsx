@@ -261,6 +261,15 @@ function ProductList() {
         e.preventDefault();
         setShowCart(false);
     };
+    const isAddedToCart = (product) => {
+        let status = false;
+        cart.map((item) => {
+            if (item.name === product.name) {
+                status = true;
+            }
+        });
+        return status;
+    };
     return (
         <div>
             <div className="navbar" style={styleObj}>
@@ -307,7 +316,7 @@ function ProductList() {
                                         <img className="product-image" src={plant.image} alt={plant.name} />
                                         <div className="product-title">{plant.name}</div>
                                         {/*Similarly like the above plant.name show other details like description and cost*/}
-                                        <button className={`product-button ${addedToCart[plant.name] ? 'added-to-cart' : ''}`} disabled={addedToCart[plant.name]} onClick={() => handleAddToCart(plant)}>Add to Cart</button>
+                                        <button className={`product-button ${isAddedToCart(plant) ? 'added-to-cart' : ''}`} disabled={isAddedToCart(plant)} onClick={() => handleAddToCart(plant)}>Add to Cart</button>
                                     </div>
                                 ))}
                             </div>
